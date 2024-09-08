@@ -1,4 +1,3 @@
-// select static elements
 const btnAddNote = document.querySelector('#btnAddNote');
 const main = document.querySelector('#main');
 btnAddNote.addEventListener('click', handleAddNote);
@@ -51,18 +50,13 @@ function handleAddNote() {
     console.log('trash note');
     note.remove();
   };
-
   main.appendChild(note);
-}
+};
 
-// TODO
 function save() {
-  // find all our elements
   const notes = document.querySelectorAll('.note .content');
   const titles = document.querySelectorAll('.note .title');
-  // init an array to carry our values
   const data = [];
-  // push an object with title and content values into our data array
   notes.forEach((note, index) => {
       const content = note.value;
       const title = titles[index].value;
@@ -70,14 +64,9 @@ function save() {
           data.push({title, content});
       }
   });
-  console.table(data); // works
-  // stamp out an array of just the title and store it
   const dataTitles = data.map(item => item.title);
-  console.log(dataTitles);
   localStorage.setItem('dataTitles', JSON.stringify(dataTitles));
-  // stamp out an array of just the content and store it
   const dataContent = data.map(item => item.content);
-  console.log(dataContent);
   localStorage.setItem('dataContent', JSON.stringify(dataContent));
 };
 
