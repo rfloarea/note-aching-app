@@ -14,6 +14,9 @@ function handleAddNote() {
       <button class="btn-trash">TRASH</button>
     </div>
     <div class="container-title">
+    <label>
+      Title
+    </label>
       <textarea
         class="title"
         placeholder="What is this called?"
@@ -21,22 +24,29 @@ function handleAddNote() {
       </textarea>
     </div>
     <div class="container-content">
+    <label>
+      Content
+    </label>
       <textarea
         class="content"
         placeholder="What do you ache to say?'
+        cols="5"
+        rows="30"
       >
       </textarea>
     </div>
   `;
-  // event listeners
+  
   const btnSave = note.querySelector('.btn-save');
   const btnTrash = note.querySelector('.btn-trash');
   btnSave.addEventListener('click', handleSaveNote);
   btnTrash.addEventListener('click', handleTrashNote);
-  // event handlers
+  
   function handleSaveNote() {
     console.log('save note');
+    save();
   };
+
   function handleTrashNote() {
     console.log('trash note');
     note.remove();
@@ -45,19 +55,33 @@ function handleAddNote() {
   main.appendChild(note);
 }
 
+// TODO
 function save() {
-  // collect all the content in each note
-  // collect each title
-  // initialize an array
-  // map over each note to push a note object into the array
-  // consider creating two localStorage items:
-  // 1. dataContent
-  // 2. dataTitles
-  // This can be done by mapping over our data array
-  // and stamping out a content and title array
-  // to be set into localStorage
-}
+  // find all our elements
+  const notes = document.querySelectorAll('.note .content');
+  const titles = document.querySelectorAll('.note .title');
+  // init an array to carry our values
+  const data = [];
+  // push an object with title and content values into our data array
+  notes.forEach((note, index) => {
+      const content = note.value;
+      const title = titles[index].value;
+      if (content.trim() !== ''){
+          data.push({title, content});
+      }
+  });
+  console.table(data); // works
+  // stamp out an array of just the title and store it
+  const dataTitles = data.map(item => item.title);
+  console.log(dataTitles);
+  localStorage.setItem('dataTitles', JSON.stringify(dataTitles));
+  // stamp out an array of just the content and store it
+  const dataContent = data.map(item => item.content);
+  console.log(dataContent);
+  localStorage.setItem('dataContent', JSON.stringify(dataContent));
+};
 
+// TODO
 function load() {
   // Called on page load
   // this parses our dataContent and dataTitles arrays
