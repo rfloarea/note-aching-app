@@ -44,3 +44,23 @@ function handleAddNote() {
 
   main.appendChild(note);
 }
+
+function save() {
+  // collect all the content in each note
+  // collect each title
+  // initialize an array
+  // map over each note to push a note object into the array
+  // consider creating two localStorage items:
+  // 1. dataContent
+  // 2. dataTitles
+  // This can be done by mapping over our data array
+  // and stamping out a content and title array
+  // to be set into localStorage
+}
+
+function load() {
+  // Called on page load
+  // this parses our dataContent and dataTitles arrays
+  // from which we then iterate through, create notes for each,
+  // and append them to main
+}
