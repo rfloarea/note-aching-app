@@ -1,30 +1,26 @@
 // select static elements
 const btnAddNote = document.querySelector('#btnAddNote');
 const main = document.querySelector('#main');
-
-// create event listener
 btnAddNote.addEventListener('click', handleAddNote);
 
 function handleAddNote() {
   console.log('add note');
-  // create a note element
   const note = document.createElement('div');
-  // give it substance
   note.classList.add('note');
   note.innerHTML = 
   `
-    <div class="actions">
-      <button>SAVE</button>
-      <button>TRASH</button>
+    <div class="buttons">
+      <button class="btn-save">SAVE</button>
+      <button class="btn-trash">TRASH</button>
     </div>
-    <div class="title-container">
+    <div class="container-title">
       <textarea
         class="title"
         placeholder="What is this called?"
       >
       </textarea>
     </div>
-    <div class="content-container">
+    <div class="container-content">
       <textarea
         class="content"
         placeholder="What do you ache to say?'
@@ -32,6 +28,18 @@ function handleAddNote() {
       </textarea>
     </div>
   `;
-  // render it
+  // event listeners
+  const btnSave = note.querySelector('.btn-save');
+  const btnTrash = note.querySelector('.btn-trash');
+  btnSave.addEventListener('click', handleSaveNote);
+  btnTrash.addEventListener('click', handleTrashNote);
+  // event handlers
+  function handleSaveNote() {
+    console.log('save note');
+  };
+  function handleTrashNote() {
+    console.log('trash note');
+  };
+
   main.appendChild(note);
 }
