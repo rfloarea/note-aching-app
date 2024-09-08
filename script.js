@@ -49,6 +49,7 @@ function handleAddNote() {
   function handleTrashNote() {
     console.log('trash note');
     note.remove();
+    save();
   };
   main.appendChild(note);
 };
