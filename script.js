@@ -2,7 +2,7 @@ const btnAddNote = document.querySelector('#btnAddNote');
 const main = document.querySelector('#main');
 btnAddNote.addEventListener('click', handleAddNote);
 
-function handleAddNote() {
+function handleAddNote(title='', content='') {
   console.log('add note');
   const note = document.createElement('div');
   note.classList.add('note');
@@ -13,25 +13,27 @@ function handleAddNote() {
       <button class="btn-trash">TRASH</button>
     </div>
     <div class="container-title">
-    <label>
-      Title
-    </label>
+      <label>
+        Title
+      </label>
       <textarea
         class="title"
-        placeholder="What is this called?"
+        cols="15"
+        rows="10"
       >
+      ${title}
       </textarea>
     </div>
     <div class="container-content">
-    <label>
-      Content
-    </label>
+      <label>
+        Content
+      </label>
       <textarea
         class="content"
-        placeholder="What do you ache to say?'
-        cols="5"
-        rows="30"
+        cols="15"
+        rows="10"
       >
+      ${content}
       </textarea>
     </div>
   `;
@@ -52,6 +54,7 @@ function handleAddNote() {
     save();
   };
   main.appendChild(note);
+  save();
 };
 
 function save() {
@@ -61,9 +64,9 @@ function save() {
   notes.forEach((note, index) => {
       const content = note.value;
       const title = titles[index].value;
-      if (content.trim() !== ''){
+      if (content.trim() && title.trim() !== ''){
           data.push({title, content});
-      }
+      };
   });
   const dataTitles = data.map(item => item.title);
   localStorage.setItem('dataTitles', JSON.stringify(dataTitles));
@@ -71,10 +74,11 @@ function save() {
   localStorage.setItem('dataContent', JSON.stringify(dataContent));
 };
 
-// TODO
 function load() {
-  // Called on page load
-  // this parses our dataContent and dataTitles arrays
-  // from which we then iterate through, create notes for each,
-  // and append them to main
-}
+  const dataTitles = JSON.parse(localStorage.getItem('dataTitles'));
+  const dataContent = JSON.parse(localStorage.getItem('dataContent'));
+  for (let i = 0; i < dataTitles.length; i++) {
+    handleAddNote(dataTitles[i], dataContent[i]);
+  };
+};
+load();
