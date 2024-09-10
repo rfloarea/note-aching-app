@@ -18,8 +18,7 @@ function handleAddNote(title='', content='') {
       </label>
       <textarea
         class="title"
-        cols="15"
-        rows="10"
+        rows="3"
       >
       ${title}
       </textarea>
@@ -30,7 +29,6 @@ function handleAddNote(title='', content='') {
       </label>
       <textarea
         class="content"
-        cols="15"
         rows="10"
       >
       ${content}
@@ -40,6 +38,7 @@ function handleAddNote(title='', content='') {
   
   const btnSave = note.querySelector('.btn-save');
   const btnTrash = note.querySelector('.btn-trash');
+  const textareaTitle = note.querySelector('.title');
   btnSave.addEventListener('click', handleSaveNote);
   btnTrash.addEventListener('click', handleTrashNote);
   
@@ -54,7 +53,9 @@ function handleAddNote(title='', content='') {
     save();
   };
   main.appendChild(note);
+  // focus title box of this note
   save();
+  textareaTitle.focus();
 };
 
 function save() {
