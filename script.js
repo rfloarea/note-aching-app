@@ -3,7 +3,6 @@ const main = document.querySelector('#main');
 btnAddNote.addEventListener('click', handleAddNote);
 
 function handleAddNote(title='', content='') {
-  console.log('add note');
   const note = document.createElement('div');
   note.classList.add('note');
   note.innerHTML = 
@@ -43,17 +42,14 @@ function handleAddNote(title='', content='') {
   btnTrash.addEventListener('click', handleTrashNote);
   
   function handleSaveNote() {
-    console.log('save note');
     save();
   };
 
   function handleTrashNote() {
-    console.log('trash note');
     note.remove();
     save();
   };
   main.appendChild(note);
-  // focus title box of this note
   save();
   textareaTitle.focus();
 };
