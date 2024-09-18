@@ -18,9 +18,7 @@ function handleAddNote(title='', content='') {
       <textarea
         class="title"
         rows="3"
-      >
-      ${title}
-      </textarea>
+      >${title}</textarea>
     </div>
     <div class="container-content">
       <label>
@@ -29,9 +27,7 @@ function handleAddNote(title='', content='') {
       <textarea
         class="content"
         rows="10"
-      >
-      ${content}
-      </textarea>
+      >${content}</textarea>
     </div>
   `;
   
@@ -61,7 +57,7 @@ function save() {
   notes.forEach((note, index) => {
       const content = note.value;
       const title = titles[index].value;
-      if (content.trim() || title.trim() !== ''){
+      if (content.trim() && title.trim() !== ''){
           data.push({title, content});
       };
   });
