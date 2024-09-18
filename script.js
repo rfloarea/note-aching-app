@@ -18,9 +18,8 @@ function handleAddNote(title='', content='') {
       <textarea
         class="title"
         rows="3"
-      >
-      ${title}
-      </textarea>
+        cols="10"
+      >${title}</textarea>
     </div>
     <div class="container-content">
       <label>
@@ -28,10 +27,7 @@ function handleAddNote(title='', content='') {
       </label>
       <textarea
         class="content"
-        rows="10"
-      >
-      ${content}
-      </textarea>
+        rows="10">${content}</textarea>
     </div>
   `;
   
