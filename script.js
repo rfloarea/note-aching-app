@@ -57,7 +57,7 @@ function save() {
   notes.forEach((note, index) => {
       const content = note.value;
       const title = titles[index].value;
-      if (content.trim() && title.trim() !== ''){
+      if (content.trim() || title.trim() !== ''){
           data.push({title, content});
       };
   });
