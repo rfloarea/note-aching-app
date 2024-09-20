@@ -1,25 +1,9 @@
-// DONE
 const main = document.querySelector('#main');
 const btnAddNote = document.querySelector('#btn-add-note');
 const btnSave = document.querySelector('#btn-save');
 btnAddNote.addEventListener('click', handleAddNewNote);
 btnSave.addEventListener('click', saveNotes);
 
-// DONE
-let data = [
-  {
-    title: "Note title one",
-    content: "Content of note one",
-    id: Math.random(),
-  },
-  {
-    title: "Note title two",
-    content: "Content of note two",
-    id: Math.random(),
-  },
-];
-
-// DONE
 const NoteCard = ({ title, content, id}) => {
   const noteCard = document.createElement('div');
   noteCard.setAttribute('id', id);
@@ -51,7 +35,6 @@ const NoteCard = ({ title, content, id}) => {
   main.appendChild(noteCard);
 };
 
-// DONE
 function buildNodeList(data) {
   while (main.firstChild) {
     main.removeChild(main.firstChild);
@@ -61,14 +44,13 @@ function buildNodeList(data) {
   };
 };
 
-// DONE
 function handleAddNewNote() {
   const newNote = {
     title: '',
     content: '',
     id: Math.random(),
   }
-  if (localStorage) {
+  if (localStorage.hasOwnProperty('notes')) {
     const notes = JSON.parse(localStorage.getItem('notes'));
     const newData = [...notes, newNote];
     NoteCard(newNote);
@@ -78,9 +60,9 @@ function handleAddNewNote() {
   }
 };
 
-// DONE
 function saveNotes() {
   const noteCards = document.querySelectorAll('.note');
+  localStorage.clear();
   data = [];
   for (const noteCard of noteCards) {
     const title = noteCard.querySelector('.title').value;
@@ -93,20 +75,17 @@ function saveNotes() {
   localStorage.setItem('notes', JSON.stringify(data));
 };
 
-// DONE
+function trashNote(id) {
+  document.getElementById(`${id}`).remove();
+  const notes = JSON.parse(localStorage.getItem('notes'));
+  console.log(notes)
+  const newNotes = notes.filter(note => note.id != id);
+  console.log(newNotes)
+  localStorage.setItem('notes', JSON.stringify(newNotes));
+};
+
 if (localStorage.hasOwnProperty('notes')) {
   const notes = JSON.parse(localStorage.getItem('notes'));
   console.log(notes);
   buildNodeList(notes);
-} else {
-  buildNodeList(data);
-}
-
-// TODO
-function trashNote(id) {
-  console.log(id)
-  // const noteCards = document.querySelectorAll('.note');
-  // console.log(noteCards)
-  // const newNoteCards = Array.from(noteCards).filter(noteCard => noteCard.id != id);
-  // buildNodeList(newNoteCards);
 };
