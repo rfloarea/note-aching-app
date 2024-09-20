@@ -13,6 +13,7 @@ header {
   align-items: center;
   background-color: aquamarine;
   border: 5px solid black;
+  border-radius: 5px;
   padding: 1rem;
   margin: 1rem;
 }
@@ -24,7 +25,8 @@ button:active {
   background-color: darkmagenta;
 }
 
-#btnAddNote {
+#btn-add-note,
+#btn-save {
   width: 100px;
   height: 100px;
   background-color: violet;
@@ -33,10 +35,12 @@ button:active {
   margin: 1rem;
 }
 
-#btnAddNote:hover {
+#btn-add-note:hover,
+#btn-save:hover {
   background-color: blueviolet;
 }
-#btnAddNote:active {
+#btn-add-note:active,
+#btn-save:active {
   background-color: darkmagenta;
 }
 
@@ -55,13 +59,12 @@ main {
 .buttons {
   display: flex;
   justify-content: space-between;
-  margin: 0.5rem;
 }
 
-.btn-save,
 .btn-trash {
   background-color: chartreuse;
   border: 2px solid blueviolet;
+  margin: 0.5rem;
 }
 
 label {

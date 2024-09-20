@@ -9,9 +9,10 @@
  */
 
 // Let's give our sad users some things to play with at the start
-const btnAddNote = document.querySelector('#btnAddNote');
+const btnAddNote = document.querySelector('#btn-add-note');
+const btnSave = document.querySelector('#btn-save')
 const main = document.querySelector('#main');
-btnAddNote.addEventListener('click', createNote);
+btnAddNote.addEventListener('click', createNoteCard);
 
 // Let's shape our data and hold onto it
 const notes = [
@@ -25,7 +26,7 @@ const notes = [
   },
 ];
 
-// Render stored data in UI
+// Get data from storage, render it in UI
 if (localStorage.hasOwnProperty('notes')) {
   // get data
   const data = JSON.parse(localStorage.getItem('notes'));
@@ -33,46 +34,54 @@ if (localStorage.hasOwnProperty('notes')) {
   notes.push(data);
   // render data to UI
   renderData(notes);
+} else {
+  renderData(notes);
 };
 
 // render data
 function renderData(notes) {
   for (const note of notes) {
     console.log(note);
-    const noteCard = document.createElement('div');
-    noteCard.classList.add('note');
-    noteCard.innerHTML = 
-    `
-      <div class="buttons">
-        <button class="btn-save">SAVE</button>
-        <button class="btn-trash">TRASH</button>
-      </div>
-      <div class="container-title">
-        <label>
-          Title
-        </label>
-        <textarea
-          class="title"
-          rows="3"
-        >${note.title}</textarea>
-      </div>
-      <div class="container-content">
-        <label>
-          Content
-        </label>
-        <textarea
-          class="content"
-          rows="10"
-        >${note.content}</textarea>
-      </div>
-    `
-    const btnTrash = noteCard.querySelector('.btn-trash');
-    btnTrash.addEventListener('click', trashNote);
-    main.appendChild(noteCard);
+    createNoteCard(note);
   };
-}
+};
 
-// refresh notes array and push into local storage
+function createNoteCard(note) {
+  const noteCard = document.createElement('div');
+  noteCard.classList.add('note');
+  noteCard.innerHTML = 
+  `
+    <button class="btn-trash">TRASH</button>
+    <div class="container-title">
+      <label>
+        Title
+      </label>
+      <textarea
+        class="title"
+        rows="3"
+      >${note.title}</textarea>
+    </div>
+    <div class="container-content">
+      <label>
+        Content
+      </label>
+      <textarea
+        class="content"
+        rows="10"
+      >${note.content}</textarea>
+    </div>
+  `;
+  const btnTrash = noteCard.querySelector('.btn-trash');
+  btnTrash.addEventListener('click', trashNote);
+  main.appendChild(noteCard);
+};
+
+function trashNote() {
+  const note = this.nodeParent.nodeParent
+  console.log(note)
+};
+
+
 function saveNote() {
   const notes = document.querySelectorAll('.note .content');
   const titles = document.querySelectorAll('.note .title');
