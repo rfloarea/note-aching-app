@@ -4,15 +4,15 @@
  * This is the story of a simple note taking system.
  * It uses boring technology that is provided by the web platform.
  * 
- * Users can create notes, edit notes, and delete notes.
- * Creating a note also saves the note.
+ * Users can create notes, save notes, edit notes, and delete notes.
  */
 
 // Let's give our sad users some things to play with at the start
+const main = document.querySelector('#main');
 const btnAddNote = document.querySelector('#btn-add-note');
 const btnSave = document.querySelector('#btn-save')
-const main = document.querySelector('#main');
 btnAddNote.addEventListener('click', createNoteCard);
+btnSave.addEventListener('click', saveNotes);
 
 // Let's shape our data and hold onto it
 const notes = [
@@ -81,21 +81,20 @@ function trashNote() {
   console.log(note)
 };
 
-
-function saveNote() {
-  const notes = document.querySelectorAll('.note .content');
-  const titles = document.querySelectorAll('.note .title');
-  
-  notes.forEach((note, index) => {
-    const content = note.value;
-    const title = titles[index].value;
-    if (content.trim() && title.trim() !== ''){
-      notesArray.push({title, content});
-    };
-  });
-
-  const dataTitles = data.map(item => item.title);
-  const dataContent = data.map(item => item.content);
-  localStorage.setItem('dataTitles', JSON.stringify(dataTitles));
-  localStorage.setItem('dataContent', JSON.stringify(dataContent));
+// The purpose of this function is to save all notes with one action
+function saveNotes() {
+  // first we collect our note elements into an array
+  const noteCards = document.querySelectorAll('.note');
+  // now we iterate through that array using a for...of loop (I like the syntax)
+  for (const noteCard of noteCards) {
+    // extract the title and content values
+    const title = noteCard.querySelector('.title').value;
+    const content = noteCard.querySelector('.content').value;
+    // create an object with those values
+    const note = { title, content };
+    // push that object into our notes array (initialized at the top of our program)
+    notes.push(note);
+  };
+  // now we store our updated notes array
+  localStorage.setItem('notes', JSON.stringify(notes));
 };
