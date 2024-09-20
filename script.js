@@ -1,8 +1,10 @@
 const main = document.querySelector('#main');
 const btnAddNote = document.querySelector('#btn-add-note');
 const btnSave = document.querySelector('#btn-save');
+const btnDeleteAll = document.querySelector('#btn-delete-all');
 btnAddNote.addEventListener('click', handleAddNewNote);
 btnSave.addEventListener('click', saveNotes);
+btnDeleteAll.addEventListener('click', deleteAllNotes);
 
 const NoteCard = ({ title, content, id}) => {
   const noteCard = document.createElement('div');
@@ -82,6 +84,13 @@ function trashNote(id) {
   const newNotes = notes.filter(note => note.id != id);
   console.log(newNotes)
   localStorage.setItem('notes', JSON.stringify(newNotes));
+};
+
+function deleteAllNotes() {
+  while (main.firstChild) {
+    main.removeChild(main.firstChild);
+  };
+  localStorage.clear();
 };
 
 if (localStorage.hasOwnProperty('notes')) {

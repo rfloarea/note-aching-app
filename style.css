@@ -26,7 +26,8 @@ button:active {
 }
 
 #btn-add-note,
-#btn-save {
+#btn-save,
+#btn-delete-all {
   width: 100px;
   height: 100px;
   background-color: violet;
@@ -36,11 +37,13 @@ button:active {
 }
 
 #btn-add-note:hover,
-#btn-save:hover {
+#btn-save:hover,
+#btn-delete-all:hover {
   background-color: blueviolet;
 }
 #btn-add-note:active,
-#btn-save:active {
+#btn-save:active,
+#btn-delete-all:hover {
   background-color: darkmagenta;
 }
 
